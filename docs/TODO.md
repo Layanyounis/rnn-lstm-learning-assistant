@@ -1,0 +1,22 @@
+# TODO - Exercise 01
+
+- [x] Create project folders
+- [x] Create README.md
+- [x] Create docs/PRD.md
+- [x] Create docs/PLAN.md
+- [x] Create docs/TODO.md
+- [x] Implement sine wave generation
+- [x] Add noise to sine signals
+- [x] Create dataset with 10-sample context window
+- [x] Implement MLP model
+- [x] Implement simple RNN model
+- [x] Implement simple LSTM model
+- [x] Use MSE loss
+- [x] Train the models
+- [x] Print true labels and predictions
+- [x] Add unit tests
+- [x] Run tests successfully
+- [ ] Upload project to GitHub
+- [ ] Share GitHub repository with the lecturer
+- [ ] Fill submission PDF
+- [ ] Submit PDF to Moodle
