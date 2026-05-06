@@ -14,7 +14,7 @@ The models used in this project are:
 
 The implementation uses Python and PyTorch.
 
-
+---
 
 ## Problem Description
 
