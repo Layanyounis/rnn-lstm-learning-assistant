@@ -1,36 +1,35 @@
-# Exercise 01 - Signal Frequency Recognition using MLP, RNN, and LSTM
+# Exercise 01 - Signal Frequency Recognition
 
-## 1. Project Overview
+## Project Overview
 
 This project was created for Exercise 01 in the AI Agents course.
 
-The goal of the project is to generate noisy sine-wave signals and train neural network models to recognize the frequency class of each signal.
+The goal of the project is to generate noisy sine-wave signals and train three neural network models to recognize the frequency of each signal.
 
-The project uses three neural network architectures:
+The models used in this project are:
 
-- Fully Connected Neural Network (MLP)
-- Recurrent Neural Network (RNN)
-- Long Short-Term Memory Network (LSTM)
+- MLP
+- RNN
+- LSTM
 
-The implementation is written in Python using PyTorch.
-
----
-
-## 2. Problem Description
-
-A signal can be represented as a sequence of numerical samples.
-
-In this exercise, each input example is a short window of 10 samples taken from a sine wave with added noise.
-
-The model receives the noisy samples and learns to predict which frequency generated the signal.
-
-This is a time-series learning problem because the input is a sequence of values.
+The implementation uses Python and PyTorch.
 
 ---
 
-## 3. Dataset Generation
+## Problem Description
 
-The dataset is generated synthetically in `src/dataset.py`.
+A sine wave can be represented as a sequence of numerical samples.
+
+In this exercise, each input contains 10 samples from a noisy sine wave.  
+The model receives these 10 samples and tries to predict which frequency class created the signal.
+
+The task is a simple time-series classification problem.
+
+---
+
+## Dataset
+
+The dataset is generated in `src/dataset.py`.
 
 The project uses four fixed frequencies:
 
@@ -39,102 +38,72 @@ The project uses four fixed frequencies:
 - 5 Hz
 - 7 Hz
 
-For each generated example:
+For each example, the program:
 
-1. A frequency is selected from the four fixed frequencies.
-2. A clean sine wave is generated.
-3. Random noise is added to the signal.
-4. A context window of 10 noisy samples is used as the model input.
-5. The label represents the frequency class.
+1. Chooses one of the four frequencies.
+2. Generates a clean sine wave.
+3. Adds random noise to the signal.
+4. Uses 10 noisy samples as the input.
+5. Saves the correct frequency class as the label.
 
-The sine signal is generated using the formula:
-
-```text
-sin(2 * pi * frequency * time)
-```
-
-Noise is added to make the task more realistic and to prevent the models from learning only perfect clean signals.
+The context window size is 10 samples.
 
 ---
 
-## 4. Models
+## Models
 
-The project implements three PyTorch models in `src/models.py`.
+The models are implemented in `src/models.py`.
 
-### 4.1 MLP Model
+### MLP
 
-The MLP model treats the 10 samples as a fixed input vector.
+The MLP receives the 10 samples as one fixed vector.
 
-It uses fully connected layers to map the input samples to one of four frequency classes.
+### RNN
 
-### 4.2 RNN Model
+The RNN reads the 10 samples as a sequence and uses a recurrent hidden state.
 
-The RNN model reads the 10 samples as a sequence.
+### LSTM
 
-It uses a recurrent hidden state to process the signal step by step and learn temporal information.
-
-### 4.3 LSTM Model
-
-The LSTM model also reads the signal as a sequence.
-
-It uses an LSTM layer, which is designed to learn temporal patterns and handle memory more effectively than a basic RNN.
+The LSTM also reads the samples as a sequence, but uses an LSTM layer to learn temporal patterns.
 
 ---
 
-## 5. Training
+## Training
 
-The training process is implemented in `src/train.py`.
+The training code is implemented in `src/train.py`.
 
 The models are trained using:
 
-- PyTorch
-- Mean Squared Error Loss (MSE)
+- Mean Squared Error loss
 - Adam optimizer
-- One-hot encoded frequency labels
+- One-hot encoded labels
 
-The MSE loss compares the model output with the correct one-hot label vector.
-
-During training, the script prints:
-
-- Model name
-- Epoch number
-- Loss value
-- Accuracy value
-- Final accuracy
-- True labels
-- Predicted labels
+During training, the program prints the loss and accuracy for each model.
 
 ---
 
-## 6. Results
+## Results
 
-The three models were trained successfully using PyTorch.
+All three models trained successfully.
 
-In the final run, all three models reached high accuracy on the generated dataset.
+In the final run, MLP, RNN, and LSTM reached `1.0` final accuracy on the generated training dataset.
 
-The MLP, RNN, and LSTM models all reached `1.0` final accuracy on the training set.
-
-Although all three models reached the same final training accuracy, they are different architectures.
-
-The MLP treats the 10 samples as a fixed vector, while the RNN and LSTM process the samples as a sequence.
-
-This shows that the generated sine-wave dataset was learnable and that the three neural-network architectures were able to recognize the signal frequency.
+Even though the final accuracy was the same, the models are different.  
+The MLP treats the input as a fixed vector, while RNN and LSTM process the input as a sequence.
 
 ---
 
-## 7. Unit Tests
+## Tests
 
-The project includes unit tests in `tests/test_dataset.py`.
+Unit tests are included in `tests/test_dataset.py`.
 
 The tests check:
 
-- The shape of the clean and noisy sine signals
-- The shape of the generated dataset
-- That all labels are in the valid range
+- The shape of the generated sine signal
+- The shape of the dataset
+- That the labels are valid
 
-The tests were run using `pytest`.
-
-Final test result:
+The final test result was:
 
 ```text
 3 passed
@@ -142,18 +111,17 @@ Final test result:
 
 ---
 
-## 8. AI Agent Usage
+## AI Agent Usage
 
-This project was developed with the help of an AI coding agent.
+An AI coding agent was used during the development process.
 
-The AI agent was used for:
+The agent helped with:
 
-- Understanding the homework requirements
-- Designing the dataset
-- Implementing the PyTorch MLP, RNN, and LSTM models
-- Writing and running unit tests
-- Reviewing the documentation
-- Fixing documentation inconsistencies
+- Understanding the requirements
+- Planning the dataset
+- Writing the PyTorch model structure
+- Reviewing the code
+- Creating documentation
 
 The prompt workflow is documented in:
 
@@ -163,7 +131,7 @@ docs/PROMPTS.md
 
 ---
 
-## 9. Project Structure
+## Project Structure
 
 ```text
 uoh-rl07-ex01/
@@ -185,67 +153,28 @@ uoh-rl07-ex01/
 
 ---
 
-## 10. Installation
+## How to Run
 
-Install the required dependencies:
+Install dependencies:
 
 ```bash
 pip install numpy pytest torch
 ```
 
----
-
-## 11. How to Run
-
-Run the training script:
+Run the training:
 
 ```bash
 python src/train.py
 ```
 
-Run the unit tests:
+Run the tests:
 
 ```bash
 pytest tests
 ```
 
-Run the simple model output demo:
+Run a simple model output example:
 
 ```bash
 python src/main.py
 ```
-
----
-
-## 12. Final Verification
-
-The final verification commands were:
-
-```bash
-python src/train.py
-pytest tests
-```
-
-The training script ran successfully for all three models:
-
-- MLP
-- RNN
-- LSTM
-
-The unit tests also passed successfully.
-
----
-
-## 13. Notes
-
-When a requirement was not explicitly defined, a simple and reasonable implementation choice was made.
-
-The selected frequencies are fixed throughout the project:
-
-```text
-1 Hz, 3 Hz, 5 Hz, 7 Hz
-```
-
-The context window size is fixed at 10 samples.
-
-The project focuses on the core homework requirements: dataset generation, MLP/RNN/LSTM implementation, MSE training, documentation, and unit testing.
